@@ -1,14 +1,18 @@
-#cas
-#  for HP Prime cas
+#python gprintm0()
+#  for HP Prime non cas
 
 #  only import for TI-84 Plus CE Python
 from ti_draw import *
 
+#  only import for HP Prime non cas
+#from graphic import *
+
 #  title        : gprint1m.py  for Casio fx-CG50, Numworks
 #               : gprint2m.py  for TI-84 Plus CE Python
-#  version      : 2022-01-22 ver 00.02
+#               : gprint3m.py  for HP Prime non cas
+#  version      : 2022-01-23 ver 00.03
 #  original     : akatuki (for Casio fx-CG50)
-#  modification : hangyodon1123 (for Numworks,TI-84 Plus CE,HP Prime cas)
+#  modification : hangyodon1123 (for Numworks,TI-84 Plus CE,HP Prime)
 
 #  functions definitions
 
@@ -25,16 +29,12 @@ def getplatform():
     pid = 1  #  Numworks
   except:
     pass
-  try:  #  pre HP Prime cas
-    from graphic import *
-  except:
-    pass
   try:
     import sys
     if sys.platform == 'TI-Python':
       pid = 2  #  TI-84 Plus CE Python
     if sys.platform == 'HP Prime':
-      pid = 3  #  HP Prime cas
+      pid = 3  #  HP Prime non cas
   except:
     pass
   return pid
@@ -44,44 +44,47 @@ def RGB(r, g, b):
   return  (r, g, b) 
 
 #  plot control
-def gprint(pf, x, y, d, st):
+def gprint(pf, colour, x, y, d, st):
   for c in st:
     num = '0123456789ABCDEF'.index(c)
     code = colour[num]
-    if pf == 0:               #  for Casio fx-CG50
+    if pf == 0:    #  for Casio fx-CG50
       for j in range(d):
         for i in range(d):
           set_pixel(x+i, y+j, code)
-    elif pf == 1 or pf == 3:  #  for Numworks, HP Prime cas
+    elif pf == 1:  #  for Numworks
       fill_rect(x, y, d, d, code)
-    else:                     #  for TI-84 Plus CE Python
+    elif pf == 3:  #  for HP Prime non cas
+      fill_rect(x, y, d, d, code)
+    else:          #  for TI-84 Plus CE Python
       set_color(code[0],code[1],code[2])
       fill_rect(x, y, d, d)
     x = x + d
 
 #  main part
+def gprintm():
 
 #  colour parettes
-colour = []
-colour = colour + [ RGB (32, 30, 22)  ]
-colour = colour + [ RGB (93, 94, 86)  ]
-colour = colour + [ RGB (51, 69, 71)  ]
-colour = colour + [ RGB (77, 52, 30)  ]
-colour = colour + [ RGB (111, 146, 156)  ]
-colour = colour + [ RGB (94, 121, 131)  ]
-colour = colour + [ RGB (173, 199, 205)  ]
-colour = colour + [ RGB (228, 229, 222)  ]
-colour = colour + [ RGB (163, 160, 155)  ]
-colour = colour + [ RGB (172, 138, 110)  ]
-colour = colour + [ RGB (153, 113, 87)  ]
-colour = colour + [ RGB (210, 173, 158)  ]
-colour = colour + [ RGB (200, 150, 119)  ]
-colour = colour + [ RGB (223, 201, 180)  ]
-colour = colour + [ RGB (98, 76, 50)  ]
-colour = colour + [ RGB (144, 93, 56)  ]
+  colour = []
+  colour = colour + [ RGB (32, 30, 22)  ]
+  colour = colour + [ RGB (93, 94, 86)  ]
+  colour = colour + [ RGB (51, 69, 71)  ]
+  colour = colour + [ RGB (77, 52, 30)  ]
+  colour = colour + [ RGB (111, 146, 156)  ]
+  colour = colour + [ RGB (94, 121, 131)  ]
+  colour = colour + [ RGB (173, 199, 205)  ]
+  colour = colour + [ RGB (228, 229, 222)  ]
+  colour = colour + [ RGB (163, 160, 155)  ]
+  colour = colour + [ RGB (172, 138, 110)  ]
+  colour = colour + [ RGB (153, 113, 87)  ]
+  colour = colour + [ RGB (210, 173, 158)  ]
+  colour = colour + [ RGB (200, 150, 119)  ]
+  colour = colour + [ RGB (223, 201, 180)  ]
+  colour = colour + [ RGB (98, 76, 50)  ]
+  colour = colour + [ RGB (144, 93, 56)  ]
 
 #  colour code 
-gdata = [
+  gdata = [
    '000000012324445205444467526677846777425466444541122200214444467776645000445' , 
    '000000084114445505644467226777846666405666444555122000214114667776445002465' , 
    '00000091A845444504444466524777446667405467454555122000214444777677445002445' , 
@@ -109,7 +112,7 @@ gdata = [
    '222EE00301247774525486DBDBBCCABBDDDBDBBBB5103BBBAAB8999CA1AAEEA11AA9C9CD8DD' , 
    '323222002229777652445DDBBBBBCBBBDBBDBDBBBA1E1B8BAA9CC999A9AAEEAE1AA9A988DDD' , 
    '212220020E156776554448BBBBDDBDDDDDBBBBBBB95AABBB998C999119A1EF1E1FA9F9988DB' , 
-#  memory over by TI-84 Plus CE Python 
+#  memory over by TI-84 Plus CE Python , delete Line by HP Prime non cas
 #   '1112200522E577774446488DDDDBBDBBBBDBBBBBBCB9BCCC9C9999AEF91EE11E11AAE999CC9' , 
 #   '21125200022167674445466BBDDBDDDBBBBBBBBBCCCCBBB89CC99AEE19E0E1E1EFAE1A998B8' , 
 #   '151E12000144666654812246BDBDDBDBBBBBBBBCBCC8CCC998CAAFEEAAE3EEE11FE21A599CC' , 
@@ -132,37 +135,45 @@ gdata = [
 #   'FCFFCFFFFEFFFFFFACAAFFFAF3FCA33ACCAAAFFF330000000000000000000000E99E2EF119A' , 
 #   'FFCFFFFFEFFFAFCCFFFEFCCA3FCCF3ACCAACAAFFF33000000000000000000000E98EEE11AAA' , 
 #   'CCFFFEF3FFFFCCFFFFACCCAFFCCF3ACC9CCAAC9BAFF300000000000000000000EFCAF3A3F9A' , 
-#   'FFFFFFFFFFCCFFFFACCCCCF3FC9FFCBCCCCBBDD77DBA30000000000000000000EFC9EEFEA99' , 
-]
+#   'FFFFFFFFFFCCFFFFACCCCCF3FC9FFCBCCCCBBDD77DBA30000000000000000000EFC9EEFEA99' 
+  ]
 
-d = 4   # pixel size
-x = 10  # picture x coords
-y = 10  # picture y coords
+  d = 4   # pixel size
+  x = 10  # picture x coords
+  y = 10  # picture y coords
 
-pf = getplatform()
+  pf = getplatform()
 #  pf :
 #       -1 = non support
 #        0 = Casio fx-CG50
 #        1 = Numworks
 #        2 = TI-84 Plus CE Python
-#        3 = HP Prime cas
+#        3 = HP Prime non cas
 
-if pf == -1:
-  print('non support')
-else:
-  if pf == 2:
+  if pf == -1:
+    print('non support')
+  if pf == 2:    #  TI-84 Plus CE Python
   	clear()
-  for st in gdata:
-    gprint(pf, x, y, d, st)
-    y = y + d
+  if pf == 3:    #  HP Prime non cas
+  	fill_rect(0, 0, 320, 222, (224, 240, 200))
+  if pf != -1:
+    for st in gdata:
+      gprint(pf, colour, x, y, d, st)
+      y = y + d
   if pf == 0:    #  Casio fx-CG59
     show_screen() 
-  elif pf == 1:  #  Numworks
+  if pf == 1:  #  Numworks
     pass
-  elif pf == 2:  #  TI-84 Plus CE Python
+  if pf == 2:  #  TI-84 Plus CE Python
     show_draw()
-  else:          #  HP Prime cas
-    wait
 
-#  for HP Prime cas
+gprintm()
+
+#  for HP Prime non cas
 #end
+
+#export gprint3m()
+#begin
+#  gprintm0();
+#  wait
+#end;

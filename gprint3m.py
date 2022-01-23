@@ -5,7 +5,7 @@
 #from ti_draw import *
 
 #  only import for HP Prime non cas
-#from graphic import *
+from graphic import *
 
 #  title        : gprint1m.py  for Casio fx-CG50, Numworks
 #               : gprint2m.py  for TI-84 Plus CE Python
@@ -112,7 +112,6 @@ def gprintm():
    '222EE00301247774525486DBDBBCCABBDDDBDBBBB5103BBBAAB8999CA1AAEEA11AA9C9CD8DD' , 
    '323222002229777652445DDBBBBBCBBBDBBDBDBBBA1E1B8BAA9CC999A9AAEEAE1AA9A988DDD' , 
    '212220020E156776554448BBBBDDBDDDDDBBBBBBB95AABBB998C999119A1EF1E1FA9F9988DB' , 
-#  memory over by TI-84 Plus CE Python , delete Line by HP Prime non cas
    '1112200522E577774446488DDDDBBDBBBBDBBBBBBCB9BCCC9C9999AEF91EE11E11AAE999CC9' , 
    '21125200022167674445466BBDDBDDDBBBBBBBBBCCCCBBB89CC99AEE19E0E1E1EFAE1A998B8' , 
    '151E12000144666654812246BDBDDBDBBBBBBBBCBCC8CCC998CAAFEEAAE3EEE11FE21A599CC' , 
@@ -172,8 +171,8 @@ gprintm()
 #  for HP Prime non cas
 #end
 
-#export gprint3m()
-#begin
-#  gprintm0();
-#  wait
-#end;
+export gprint3m()
+begin
+  gprintm0();
+  wait
+end;
