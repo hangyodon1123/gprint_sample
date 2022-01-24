@@ -1,18 +1,18 @@
 #python gprintm0()
 #  for HP Prime non cas
 
+#  title        : gprint1m.py  for Casio fx-CG50, Numworks
+#               : gprint2m.py  for TI-84 Plus CE Python
+#               : gprint3m.py  for HP Prime non cas
+#  version      : 2022-01-24 ver 00.04
+#  original     : akatuki (for Casio fx-CG50)
+#  modification : hangyodon1123 (for Numworks,TI-84 Plus CE,HP Prime)
+
 #  only import for TI-84 Plus CE Python
 from ti_draw import *
 
 #  only import for HP Prime non cas
 #from graphic import *
-
-#  title        : gprint1m.py  for Casio fx-CG50, Numworks
-#               : gprint2m.py  for TI-84 Plus CE Python
-#               : gprint3m.py  for HP Prime non cas
-#  version      : 2022-01-23 ver 00.03
-#  original     : akatuki (for Casio fx-CG50)
-#  modification : hangyodon1123 (for Numworks,TI-84 Plus CE,HP Prime)
 
 #  functions definitions
 
@@ -39,10 +39,6 @@ def getplatform():
     pass
   return pid
 
-#  colour string generates
-def RGB(r, g, b):
-  return  (r, g, b) 
-
 #  plot control
 def gprint(pf, colour, x, y, d, st):
   for c in st:
@@ -58,7 +54,7 @@ def gprint(pf, colour, x, y, d, st):
       fill_rect(x, y, d, d, code)
     else:          #  for TI-84 Plus CE Python
       set_color(code[0],code[1],code[2])
-      fill_rect(x, y, d, d)
+      fill_rect(x - 1, y - 1, d + 2, d + 2)
     x = x + d
 
 #  main part
@@ -66,22 +62,12 @@ def gprintm():
 
 #  colour parettes
   colour = []
-  colour = colour + [ RGB (32, 30, 22)  ]
-  colour = colour + [ RGB (93, 94, 86)  ]
-  colour = colour + [ RGB (51, 69, 71)  ]
-  colour = colour + [ RGB (77, 52, 30)  ]
-  colour = colour + [ RGB (111, 146, 156)  ]
-  colour = colour + [ RGB (94, 121, 131)  ]
-  colour = colour + [ RGB (173, 199, 205)  ]
-  colour = colour + [ RGB (228, 229, 222)  ]
-  colour = colour + [ RGB (163, 160, 155)  ]
-  colour = colour + [ RGB (172, 138, 110)  ]
-  colour = colour + [ RGB (153, 113, 87)  ]
-  colour = colour + [ RGB (210, 173, 158)  ]
-  colour = colour + [ RGB (200, 150, 119)  ]
-  colour = colour + [ RGB (223, 201, 180)  ]
-  colour = colour + [ RGB (98, 76, 50)  ]
-  colour = colour + [ RGB (144, 93, 56)  ]
+  colour = colour + [ ( 32,  30,  22) ]
+  colour = colour + [ ( 93,  94,  86) ] + [ ( 51,  69,  71) ] + [ ( 77,  52,  30) ]
+  colour = colour + [ (111, 146, 156) ] + [ ( 94, 121, 131) ] + [ (173, 199, 205) ]
+  colour = colour + [ (228, 229, 222) ] + [ (163, 160, 155) ] + [ (172, 138, 110) ]
+  colour = colour + [ (153, 113,  87) ] + [ (210, 173, 158) ] + [ (200, 150, 119) ]
+  colour = colour + [ (223, 201, 180) ] + [ ( 98,  76,  50) ] + [ (144,  93,  56) ]
 
 #  colour code 
   gdata = [
